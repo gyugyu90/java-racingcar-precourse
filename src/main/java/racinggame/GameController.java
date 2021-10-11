@@ -35,8 +35,8 @@ public class GameController {
             try {
                 String input = gameView.roundsForm();
                 return Integer.parseInt(input);
-            } catch (NumberFormatException ex) {
-                gameView.printErrorMessage("숫자 형식에 맞지 않습니다.");
+            } catch (IllegalArgumentException ex) {
+                gameView.printErrorMessage(ex.getMessage());
             }
         }
     }

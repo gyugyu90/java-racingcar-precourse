@@ -6,6 +6,9 @@ public class RacingCar {
 
     private static final String HYPHEN = "-";
 
+    private static final String MESSAGE_EMPTY_STRING = "이름을 빈 문자열로 입력할 수 없습니다.";
+    private static final String MESSAGE_TOO_LONG_STRING = "이름은 5자 이내로 입력 가능합니다.";
+
     private String name;
     private int progress;
 
@@ -55,11 +58,11 @@ public class RacingCar {
 
     private void validate(String name) {
         if (name == null || name.length() == 0) {
-            throw new IllegalArgumentException("이름을 빈 문자열로 입력할 수 없습니다.");
+            throw new IllegalArgumentException(MESSAGE_EMPTY_STRING);
         }
 
         if (name.length() > 5) {
-            throw new IllegalArgumentException("이름은 5자 이내로 입력 가능합니다.");
+            throw new IllegalArgumentException(MESSAGE_TOO_LONG_STRING);
         }
     }
 }
