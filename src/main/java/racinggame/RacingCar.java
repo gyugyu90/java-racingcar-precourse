@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class RacingCar {
 
+    private static final String HYPHEN = "-";
+
     private String name;
     private int progress;
 
@@ -29,6 +31,15 @@ public class RacingCar {
         progress++;
     }
 
+    public String getStatus() {
+        StringBuilder hyphens = new StringBuilder();
+        for (int i = 0; i < progress; i++) {
+            hyphens.append(HYPHEN);
+        }
+
+        return String.format("%s : %s", name, hyphens);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -51,5 +62,4 @@ public class RacingCar {
             throw new IllegalArgumentException("이름은 5자 이내로 입력 가능합니다.");
         }
     }
-
 }
