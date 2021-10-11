@@ -1,9 +1,7 @@
 package racinggame;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GameService {
 
@@ -49,22 +47,12 @@ public class GameService {
     }
 
     public String calculateWinners() {
-        int highestScore = 0;
-        Set<String> winners = new HashSet<>(); // TODO refactor this
+        WinnerCalculator winnerCalculator = new WinnerCalculator();
         for (RacingCar racingCar : racingCars.getRacingCars()) {
-            int score = racingCar.getProgress();
-            if (score > highestScore) {
-                highestScore = score;
-                winners.clear();
-                winners.add(racingCar.getName());
-            }
-
-            if (score == highestScore) {
-                winners.add(racingCar.getName());
-            }
+            winnerCalculator.evaluate(racingCar);
         }
 
-        return String.join(",", winners);
+        return String.join(",", winnerCalculator.getWinners());
     }
 
     RacingCars getCars() {
