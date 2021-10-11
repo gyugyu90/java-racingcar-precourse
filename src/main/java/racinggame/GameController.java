@@ -1,7 +1,5 @@
 package racinggame;
 
-import java.util.List;
-
 public class GameController {
 
     private final GameView gameView;
@@ -14,22 +12,21 @@ public class GameController {
 
     public void run() {
         generateRacingCars();
-        int rounds = getRounds();
+        getRounds();
 
         gameView.showResultHeader();
-        for (int i = 0; i < rounds; i++) {
-            List<String> statuses = gameService.proceedRound();
-            gameView.showRaceStatus(statuses);
-        }
+
+        GameResult gameResult = gameService.race();
+        gameView.showRaceResult(gameResult);
 
         String winners = gameService.calculateWinners();
         gameView.showWinners(winners);
     }
 
     private void generateRacingCars() {
-        boolean generated = false;
-        while(!generated) {
-            generated = doGenerateRacingCars();
+        boolean isReady = false;
+        while(!isReady) {
+            isReady = doGenerateRacingCars();
         }
     }
 
@@ -44,14 +41,21 @@ public class GameController {
         }
     }
 
-    private int getRounds() {
-        while(true) { // TODO refactor this
-            try {
-                String input = gameView.roundsForm();
-                return gameService.parseRounds(input);
-            } catch (IllegalArgumentException ex) {
-                gameView.printErrorMessage(ex.getMessage());
-            }
+    private void getRounds() {
+        boolean isReady = false;
+        while(!isReady) {
+            isReady = doGetRounds();
+        }
+    }
+
+    private boolean doGetRounds() {
+        try {
+            String input = gameView.roundsForm();
+            gameService.parseRounds(input);
+            return true;
+        } catch (IllegalArgumentException ex) {
+            gameView.printErrorMessage(ex.getMessage());
+            return false;
         }
     }
 }

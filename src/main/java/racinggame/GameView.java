@@ -20,11 +20,10 @@ public class GameView {
         System.out.println("[ERROR] " + message);
     }
 
-    public void showRaceStatus(List<String> statuses) {
-        for (String status : statuses) {
-            System.out.println(status);
+    public void showRaceResult(GameResult gameResult) {
+        for (GameRound round : gameResult.getRounds()) {
+            showRaceStatus(round.getStatuses());
         }
-        System.out.println();
     }
 
     public void showResultHeader() {
@@ -33,5 +32,12 @@ public class GameView {
 
     public void showWinners(String winners) {
         System.out.printf("최종 우승자는 %s 입니다.%n", winners);
+    }
+
+    private void showRaceStatus(List<String> statuses) {
+        for (String status : statuses) {
+            System.out.println(status);
+        }
+        System.out.println();
     }
 }

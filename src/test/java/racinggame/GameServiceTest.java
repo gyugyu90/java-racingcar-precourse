@@ -57,7 +57,8 @@ public class GameServiceTest {
     @DisplayName("rounds - 사용자가 입력한 값으로 round 값을 파싱")
     @Test
     void testParseRounds01() {
-        assertEquals(12, gameService.parseRounds("12"));
+        gameService.parseRounds("12");
+        assertEquals(12, gameService.getRounds());
     }
 
     @DisplayName("rounds - 사용자가 입력한 값이 숫자가 아닐 경우 예외 발생")

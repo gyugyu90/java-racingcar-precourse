@@ -14,6 +14,7 @@ public class GameService {
     private static final String MESSAGE_NUMBER_FORMAT = "숫자 형식에 맞지 않습니다.";
 
     private RacingCars racingCars;
+    private int rounds;
 
     public void registerRacingCars(String source) {
         List<RacingCar> list = new ArrayList<>();
@@ -25,15 +26,24 @@ public class GameService {
         racingCars = new RacingCars(list);
     }
 
-    public int parseRounds(String source) {
+    public void parseRounds(String source) {
         try {
-            int rounds = Integer.parseInt(source);
-            validateNaturalNumber(rounds);
-
-            return rounds;
+            int number = Integer.parseInt(source);
+            validateNaturalNumber(number);
+            rounds = number;
         } catch (NumberFormatException ex) {
             throw new IllegalArgumentException(MESSAGE_NUMBER_FORMAT);
         }
+    }
+
+    public GameResult race() {
+        List<GameRound> gameRounds = new ArrayList<>();
+        for (int i = 0; i < rounds; i++) {
+            List<String> statuses = proceedRound();
+            gameRounds.add(new GameRound(statuses));
+        }
+
+        return new GameResult(gameRounds);
     }
 
     public List<String> proceedRound() {
@@ -57,6 +67,10 @@ public class GameService {
 
     RacingCars getCars() {
         return racingCars;
+    }
+
+    int getRounds() {
+        return rounds;
     }
 
     private void validateNotEmpty(List<RacingCar> list) {
