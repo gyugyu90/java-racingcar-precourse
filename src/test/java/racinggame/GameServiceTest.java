@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -18,8 +17,8 @@ public class GameServiceTest {
     @Test
     void testRegisterRacingCars01() {
         String source = "foo,bar,baz,lorem,ipsum";
-        List<RacingCar> racingCars = gameService.registerRacingCars(source);
-        assertThat(racingCars).isEqualTo(Arrays.asList(
+        RacingCars racingCars = gameService.registerRacingCars(source);
+        assertThat(racingCars.getRacingCars()).isEqualTo(Arrays.asList(
                 new RacingCar("foo"),
                 new RacingCar("bar"),
                 new RacingCar("baz"),

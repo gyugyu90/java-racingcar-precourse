@@ -17,4 +17,19 @@ public class GameView {
     public void printErrorMessage(String message) {
         System.err.println("[ERROR] " + message);
     }
+
+    public void showRaceStatus(RacingCars racingCars) {
+        for (RacingCar racingCar : racingCars.getRacingCars()) {
+            System.out.println(racingCar.getStatus());
+        }
+        System.out.println();
+    }
+
+    public void showResultHeader() {
+        System.out.println("실행 결과");
+    }
+
+    public void showWinners(String winners) {
+        System.out.printf("최종 우승자는 %s 입니다.%n", winners);
+    }
 }

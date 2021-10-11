@@ -1,7 +1,5 @@
 package racinggame;
 
-import java.util.List;
-
 public class GameController {
 
     private final GameView gameView;
@@ -13,13 +11,21 @@ public class GameController {
     }
 
     public void run() {
-        List<RacingCar> racingCars = generateRacingCars();
+        RacingCars racingCars = generateRacingCars();
         int rounds = getRounds();
-        System.out.println("rounds: " + rounds);
-        // TODO implement rounds
+
+        gameView.showResultHeader();
+        for (int i = 0; i < rounds; i++) {
+            gameService.proceedRound(racingCars);
+            gameView.showRaceStatus(racingCars);
+        }
+
+        String winners = gameService.calculateWinners(racingCars);
+        gameView.showWinners(winners);
+        System.out.println("racingCars: " + racingCars.getRacingCars());
     }
 
-    private List<RacingCar> generateRacingCars() {
+    private RacingCars generateRacingCars() {
         while(true) {
             try {
                 String input = gameView.racingCarsForm();

@@ -56,6 +56,14 @@ public class RacingCar {
         return Objects.hash(name, progress);
     }
 
+    @Override
+    public String toString() {
+        return "RacingCar{" +
+                "name='" + name + '\'' +
+                ", progress=" + progress +
+                '}';
+    }
+
     private void validate(String name) {
         if (name == null || name.length() == 0) {
             throw new IllegalArgumentException(MESSAGE_EMPTY_STRING);
