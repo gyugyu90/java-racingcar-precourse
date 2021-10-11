@@ -74,7 +74,7 @@ public class GameService {
 	}
 
 	private void validateNotEmpty(List<RacingCar> list) {
-		if (list.size() > 0) {
+		if (list.size() > ZERO) {
 			return;
 		}
 		throw new IllegalArgumentException(MESSAGE_INPUT_NOT_VALID);

@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class RacingCar {
 
+	private static final int SCORE_STARTING_POINT = 4;
 	private static final String HYPHEN = "-";
 
 	private static final int MAX_NAME_LENGTH = 5;
@@ -30,7 +31,7 @@ public class RacingCar {
 	}
 
 	public void race(int number) {
-		if (number < 4) {
+		if (number < SCORE_STARTING_POINT) {
 			return;
 		}
 		progress++;
