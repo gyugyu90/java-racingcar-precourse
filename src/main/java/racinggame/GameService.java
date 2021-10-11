@@ -16,9 +16,9 @@ public class GameService {
 	private RacingCars racingCars;
 	private int rounds;
 
-	public void registerRacingCars(String source) {
+	public void registerRacingCars(UserResponse response) {
 		List<RacingCar> list = new ArrayList<>();
-		for (String s : source.split(COMMA)) {
+		for (String s : response.getValue().split(COMMA)) {
 			list.add(new RacingCar(s));
 		}
 
@@ -26,9 +26,9 @@ public class GameService {
 		racingCars = new RacingCars(list);
 	}
 
-	public void parseRounds(String source) {
+	public void parseRounds(UserResponse response) {
 		try {
-			int number = Integer.parseInt(source);
+			int number = Integer.parseInt(response.getValue());
 			validateNaturalNumber(number);
 			rounds = number;
 		} catch (NumberFormatException ex) {

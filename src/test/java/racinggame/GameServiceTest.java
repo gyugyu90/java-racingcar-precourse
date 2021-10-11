@@ -17,7 +17,7 @@ public class GameServiceTest {
     @Test
     void testRegisterRacingCars01() {
         String source = "foo,bar,baz,lorem,ipsum";
-        gameService.registerRacingCars(source);
+        gameService.registerRacingCars(new UserResponse(source));
         assertThat(gameService.getCars().getRacingCars()).isEqualTo(Arrays.asList(
                 new RacingCar("foo"),
                 new RacingCar("bar"),
@@ -32,7 +32,7 @@ public class GameServiceTest {
     void testRegisterRacingCars02() {
         String source = "abcdef,foo,bar";
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> gameService.registerRacingCars(source))
+                .isThrownBy(() -> gameService.registerRacingCars(new UserResponse(source)))
                 .withMessageContaining("이름은 5자 이내로 입력 가능합니다.");
     }
 
@@ -41,7 +41,7 @@ public class GameServiceTest {
     void testRegisterRacingCars03() {
         String source = "foo,,bar";
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> gameService.registerRacingCars(source))
+                .isThrownBy(() -> gameService.registerRacingCars(new UserResponse(source)))
                 .withMessageContaining("이름을 빈 문자열로 입력할 수 없습니다.");
     }
 
@@ -50,14 +50,14 @@ public class GameServiceTest {
     void testRegisterRacingCars04() {
         String source = ",,,";
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> gameService.registerRacingCars(source))
+                .isThrownBy(() -> gameService.registerRacingCars(new UserResponse(source)))
                 .withMessageContaining("형식에 맞게 값을 입력해 주세요.");
     }
 
     @DisplayName("rounds - 사용자가 입력한 값으로 round 값을 파싱")
     @Test
     void testParseRounds01() {
-        gameService.parseRounds("12");
+        gameService.parseRounds(new UserResponse("12"));
         assertEquals(12, gameService.getRounds());
     }
 
@@ -65,7 +65,7 @@ public class GameServiceTest {
     @Test
     void testParseRounds02() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> gameService.parseRounds("aaa"))
+                .isThrownBy(() -> gameService.parseRounds(new UserResponse("aaa")))
                 .withMessageContaining("숫자 형식에 맞지 않습니다.");
     }
 
@@ -73,7 +73,7 @@ public class GameServiceTest {
     @Test
     void testParseRounds03() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> gameService.parseRounds("0"))
+                .isThrownBy(() -> gameService.parseRounds(new UserResponse("0")))
                 .withMessageContaining("1 이상의 숫자를 입력해 주세요.");
     }
 }

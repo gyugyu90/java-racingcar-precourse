@@ -32,7 +32,7 @@ public class GameController {
 
 	private boolean doGenerateRacingCars() {
 		try {
-			String input = gameView.racingCarsForm();
+			UserResponse input = gameView.racingCarsForm();
 			gameService.registerRacingCars(input);
 			return true;
 		} catch (IllegalArgumentException ex) {
@@ -50,7 +50,7 @@ public class GameController {
 
 	private boolean doGetRounds() {
 		try {
-			String input = gameView.roundsForm();
+			UserResponse input = gameView.roundsForm();
 			gameService.parseRounds(input);
 			return true;
 		} catch (IllegalArgumentException ex) {
