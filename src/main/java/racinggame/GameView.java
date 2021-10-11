@@ -2,6 +2,8 @@ package racinggame;
 
 import nextstep.utils.Console;
 
+import java.util.List;
+
 public class GameView {
 
     public String racingCarsForm() {
@@ -18,9 +20,9 @@ public class GameView {
         System.out.println("[ERROR] " + message);
     }
 
-    public void showRaceStatus(RacingCars racingCars) {
-        for (RacingCar racingCar : racingCars.getRacingCars()) {
-            System.out.println(racingCar.getStatus());
+    public void showRaceStatus(List<String> statuses) {
+        for (String status : statuses) {
+            System.out.println(status);
         }
         System.out.println();
     }

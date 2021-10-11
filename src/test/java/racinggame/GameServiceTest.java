@@ -17,8 +17,8 @@ public class GameServiceTest {
     @Test
     void testRegisterRacingCars01() {
         String source = "foo,bar,baz,lorem,ipsum";
-        RacingCars racingCars = gameService.registerRacingCars(source);
-        assertThat(racingCars.getRacingCars()).isEqualTo(Arrays.asList(
+        gameService.registerRacingCars(source);
+        assertThat(gameService.getCars().getRacingCars()).isEqualTo(Arrays.asList(
                 new RacingCar("foo"),
                 new RacingCar("bar"),
                 new RacingCar("baz"),

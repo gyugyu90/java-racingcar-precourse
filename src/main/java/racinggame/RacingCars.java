@@ -2,6 +2,7 @@ package racinggame;
 
 import nextstep.utils.Randoms;
 
+import java.util.Collections;
 import java.util.List;
 
 public class RacingCars {
@@ -19,6 +20,6 @@ public class RacingCars {
     }
 
     public List<RacingCar> getRacingCars() {
-        return racingCars;
+        return Collections.unmodifiableList(racingCars);
     }
 }

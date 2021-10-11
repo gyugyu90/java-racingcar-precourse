@@ -1,5 +1,7 @@
 package racinggame;
 
+import java.util.List;
+
 public class GameController {
 
     private final GameView gameView;
@@ -11,36 +13,42 @@ public class GameController {
     }
 
     public void run() {
-        RacingCars racingCars = generateRacingCars();
+        generateRacingCars();
         int rounds = getRounds();
 
         gameView.showResultHeader();
         for (int i = 0; i < rounds; i++) {
-            gameService.proceedRound(racingCars);
-            gameView.showRaceStatus(racingCars);
+            List<String> statuses = gameService.proceedRound();
+            gameView.showRaceStatus(statuses);
         }
 
-        String winners = gameService.calculateWinners(racingCars);
+        String winners = gameService.calculateWinners();
         gameView.showWinners(winners);
-        System.out.println("racingCars: " + racingCars.getRacingCars());
     }
 
-    private RacingCars generateRacingCars() {
-        while(true) {
-            try {
-                String input = gameView.racingCarsForm();
-                return gameService.registerRacingCars(input);
-            } catch (IllegalArgumentException ex) {
-                gameView.printErrorMessage(ex.getMessage());
-            }
+    private void generateRacingCars() {
+        boolean generated = false;
+        while(!generated) {
+            generated = doGenerateRacingCars();
+        }
+    }
+
+    private boolean doGenerateRacingCars() {
+        try {
+            String input = gameView.racingCarsForm();
+            gameService.registerRacingCars(input);
+            return true;
+        } catch (IllegalArgumentException ex) {
+            gameView.printErrorMessage(ex.getMessage());
+            return false;
         }
     }
 
     private int getRounds() {
-        while(true) {
+        while(true) { // TODO refactor this
             try {
                 String input = gameView.roundsForm();
-                return Integer.parseInt(input);
+                return gameService.parseRounds(input);
             } catch (IllegalArgumentException ex) {
                 gameView.printErrorMessage(ex.getMessage());
             }
