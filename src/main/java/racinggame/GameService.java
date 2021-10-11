@@ -46,16 +46,6 @@ public class GameService {
 		return new GameResult(gameRounds);
 	}
 
-	public List<String> proceedRound() {
-		racingCars.race();
-
-		List<String> messages = new ArrayList<>();
-		for (RacingCar racingCar : racingCars.getRacingCars()) {
-			messages.add(racingCar.getStatus());
-		}
-		return messages;
-	}
-
 	public String calculateWinners() {
 		WinnerCalculator winnerCalculator = new WinnerCalculator();
 		for (RacingCar racingCar : racingCars.getRacingCars()) {
@@ -71,6 +61,16 @@ public class GameService {
 
 	int getRounds() {
 		return rounds;
+	}
+
+	private List<String> proceedRound() {
+		racingCars.race();
+
+		List<String> messages = new ArrayList<>();
+		for (RacingCar racingCar : racingCars.getRacingCars()) {
+			messages.add(racingCar.getStatus());
+		}
+		return messages;
 	}
 
 	private void validateNotEmpty(List<RacingCar> list) {
