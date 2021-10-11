@@ -15,7 +15,7 @@ public class GameView {
     }
 
     public void printErrorMessage(String message) {
-        System.err.println("[ERROR] " + message);
+        System.out.println("[ERROR] " + message);
     }
 
     public void showRaceStatus(RacingCars racingCars) {
